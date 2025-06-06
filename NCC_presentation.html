@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation: A Vision for a Data-Driven Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            height: 100%; /* Ensure slide takes full height */
+            width: 100%;
+        }
+        .slide.active {
+            display: flex; /* Use flex to help with centering and layout */
+            opacity: 1;
+        }
+        .bg-ncc-blue { background-color: #00467F; }
+        .text-ncc-blue { color: #00467F; }
+        .border-ncc-blue { border-color: #00467F; }
+        .bg-ncc-gray { background-color: #F0F2F5; }
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1100px;
+            aspect-ratio: 16 / 9;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Slide Deck Container -->
+    <div id="presentation" class="bg-white rounded-lg overflow-hidden flex flex-col slide-container">
+        <!-- Slides will be injected here by JavaScript -->
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="mt-4 flex items-center justify-between w-full max-w-xs sm:max-w-md">
+        <button id="prevBtn" class="bg-ncc-blue text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-opacity-90 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed">
+            Previous
+        </button>
+        <div id="slideCounter" class="text-gray-700 font-medium">
+            Slide <span id="currentSlideNum">1</span> of <span id="totalSlidesNum"></span>
+        </div>
+        <button id="nextBtn" class="bg-ncc-blue text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-opacity-90 transition-all">
+            Next
+        </button>
+    </div>
+
+    <!-- Instructions -->
+    <div class="mt-6 p-4 bg-ncc-gray rounded-lg max-w-2xl text-center text-sm text-gray-700">
+        <p>&copy; Paul Harold, June 2025. Developed with assistance of Google Gemini 2.5 Pro (preview).</p>
+    </div>
+
+
+    <script>
+        const slidesData = [
+            // Slide 1: Title
+            {
+                type: 'title',
+                title: 'Designing a Scalable Data Architecture for Newcastle City Council',
+                subtitle: 'A Vision for a Data-Driven Future',
+                author: 'Paul Harold',
+                role: 'Data Architect, Newcastle City Council',
+                imageUrl: 'https://images.unsplash.com/photo-1531403009284-440993d21634?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzc0fDB8MXxzZWFyY2h8MTF8fGFic3RyYWN0JTIwZGF0YXxlbnwwfHx8fDE3MTc2NTgwODB8MA&ixlib=rb-4.0.3&q=80&w=1080'
+            },
+            // Slide 2: Introduction
+            {
+                type: 'split',
+                title: 'Introduction & Our Vision',
+                points: [
+                    "Empower NCC to be truly <strong>data-driven & evidence-led</strong>.",
+                    "Transform how we use data to deliver <strong>exceptional services</strong>.",
+                    "Foster greater <strong>public trust</strong> through transparency and impact.",
+                    "Tangibly <strong>improve the lives</strong> of everyone in Newcastle."
+                ],
+                imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzc0fDB8MXxzZWFyY2h8N3x8Y29sbGFib3JhdGlvbnxlbnwwfHx8fDE3MTc2NTgxMTB8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                caption: "My vision aligns with our Council Plan's commitment to being 'Evidence Led and Data Driven'."
+            },
+            // Slide 3: Opportunity
+            {
+                type: 'three-column',
+                title: 'Our Data Opportunity: Building on Strengths',
+                columns: [
+                    {
+                        heading: 'Strengths to Build On',
+                        items: ['Existing Open Data Platform', 'Smart City Initiatives (IoT)', 'Agile Digital Development']
+                    },
+                    {
+                        heading: 'Challenges to Address',
+                        items: ['Departmental Data Silos', 'Legacy System Integration', 'Consistent Data Quality']
+                    },
+                    {
+                        heading: 'The Core Opportunity',
+                        items: ['Unify data assets', 'Modernize infrastructure', 'Enable proactive services']
+                    }
+                ],
+                footer: "<strong>Example:</strong> Integrate Net Zero data with housing information to proactively support households, directly impacting our Anti-Poverty and Net Zero goals."
+            },
+            // Slide 4: Foundational Pillars
+            {
+                type: 'pillars',
+                title: 'Foundational Pillars of Our Future Data Architecture',
+                pillars: [
+                    {
+                        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-ncc-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>`,
+                        name: 'Scalability',
+                        description: 'Cloud-native, modular design. Exploring pragmatic data mesh/fabric concepts to adapt to future growth and new data sources like IoT.'
+                    },
+                    {
+                        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-ncc-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>`,
+                        name: 'Security',
+                        description: 'Robust data governance, GDPR compliance, and \'Data Protection by Design\' to protect citizen data and ensure regulatory compliance.'
+                    },
+                    {
+                        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-ncc-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-opacity="0.3"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm0 14c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm-8-8c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm16 0c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z" opacity="0.4"/></svg>`,
+                        name: 'Ethics',
+                        description: 'A proactive Data Ethics Framework promoting Fairness, Transparency, Accountability, and Privacy to ensure responsible innovation.'
+                    }
+                ]
+            },
+            // Slide 5: Table
+            {
+                type: 'table',
+                title: 'Core Principles of Our Data Architecture Vision',
+                headers: ['Principle', 'Key Architectural Approaches/Strategies', 'Benefit to NCC & Citizens'],
+                rows: [
+                    ['Scalability', 'Cloud-native, Modularity, API-first, IoT integration.', 'Adapts to future growth, supports smart services.'],
+                    ['Security', 'Robust Governance, Data Protection by Design, Zero-Trust.', 'Protects citizen data, ensures compliance, builds trust.'],
+                    ['Ethics', 'Proactive Ethics Framework, Privacy-by-Design, Bias Audits.', 'Ensures fair service delivery, responsible AI, public confidence.'],
+                    ['Innovation', 'Leverage RPA/AI/ML, Modern Data Platforms, Advanced Analytics.', 'Drives efficiency, unlocks new insights, enables prediction.'],
+                    ['Data Sharing', 'Standardized APIs, Federated Governance, Secure Exchange.', 'Breaks down silos, enhances collaboration for holistic services.'],
+                    ['Public Trust', 'Transparent practices, Demonstrable security & ethics.', 'Strengthens citizen confidence and engagement.']
+                ]
+            },
+            // Slide 6: Public Value
+            {
+                type: 'split',
+                title: 'Enabling Council Priorities & Delivering Public Value',
+                points: [
+                    "<strong>Enhanced Service Delivery:</strong> More efficient, responsive, and personalized services to support priorities like our Inclusive Economy.",
+                    "<strong>Effective Data Sharing:</strong> Breaking down internal silos for a holistic view of resident needs and secure partner collaboration.",
+                    "<strong>Increased Public Trust:</strong> The cornerstone, achieved through demonstrable security, ethics, and delivering reliable, improved services."
+                ],
+                imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzc0fDB8MXxzZWFyY2h8NHx8cHVibGljJTIwdHJ1c3R8ZW58MHx8fHwxNzE3NjU4MTYxfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                caption: "<em>'At ASOS, I led a transformation that eliminated warehouse backlogs, directly improving service delivery.'</em> - Paul Harold"
+            },
+            // Slide 7: Next Steps
+            {
+                type: 'split-reversed',
+                title: 'Driving Innovation & Our Next Steps',
+                points: [
+                    "<strong>Fostering Innovation:</strong> Practical AI/RPA to streamline processes and modern platforms for predictive analytics.",
+                    "<strong>1. Deep Stakeholder Engagement:</strong> Listen, learn, and understand needs across all departments.",
+                    "<strong>2. Establish Data Governance Working Group:</strong> Co-develop our frameworks collaboratively.",
+                    "<strong>3. Develop a Phased Implementation Roadmap:</strong> Prioritize 'quick wins' for early value."
+                ],
+                imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzc0fDB8MXxzZWFyY2h8Nnx8c3RyYXRlZ3klMjBzdGVwc3xlbnwwfHx8fDE3MTc2NTk0OTB8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                caption: "<em>'At Arm Ltd., I led a successful RPA pilot, showing significant potential to reduce manual effort.'</em> - Paul Harold"
+            },
+            // Slide 8: Conclusion
+            {
+                type: 'conclusion',
+                title: 'Let\'s build a data-driven future for Newcastle, together.',
+                statement: 'This vision for a <strong>scalable, secure, and ethical</strong> data architecture is a strategic enabler for our core mission. Success requires collective commitment and partnership.',
+                imageUrl: 'https://images.unsplash.com/photo-1538688423619-a81d3f23454b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNzc0fDB8MXxzZWFyY2h8Mnx8bmV3Y2FzdGxlJTIwdXBvbiUyMHR5bmV8ZW58MHx8fHwxNzE3NjU4MjMyfDA&ixlib=rb-4.0.3&q=80&w=1080'
+            },
+            // Slide 9: Q&A
+            {
+                type: 'qa',
+                title: 'Thank you.',
+                subtitle: 'Questions?'
+            }
+        ];
+
+        const presentationContainer = document.getElementById('presentation');
+        let currentSlide = 0;
+
+        function renderSlides() {
+            presentationContainer.innerHTML = '';
+            slidesData.forEach((slide, index) => {
+                let slideHtml = '';
+                // The 'active' class is only added to the first slide initially.
+                const activeClass = index === 0 ? 'active' : '';
+
+                switch (slide.type) {
+                    case 'title':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col justify-center items-center text-center p-8 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 70, 127, 0.8), rgba(0, 70, 127, 0.8)), url('${slide.imageUrl}');">
+                                <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight">${slide.title}</h1>
+                                <p class="text-xl md:text-2xl text-white mt-4">${slide.subtitle}</p>
+                                <div class="mt-12 border-t-2 border-white w-1/4"></div>
+                                <p class="text-lg text-white mt-8 font-semibold">${slide.author}</p>
+                                <p class="text-md text-white">${slide.role}</p>
+                            </div>
+                        `;
+                        break;
+                    case 'split':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col md:flex-row">
+                                <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                    <h2 class="text-3xl font-bold text-ncc-blue mb-6">${slide.title}</h2>
+                                    <ul class="space-y-4 text-gray-700 text-lg">${slide.points.map(p => `<li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>${p}</span></li>`).join('')}</ul>
+                                    <p class="mt-6 text-gray-600 italic">${slide.caption}</p>
+                                </div>
+                                <div class="w-full md:w-1/2 h-64 md:h-full bg-cover bg-center" style="background-image: url('${slide.imageUrl}');"></div>
+                            </div>
+                        `;
+                        break;
+                    case 'split-reversed':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col md:flex-row-reverse">
+                                 <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                    <h2 class="text-3xl font-bold text-ncc-blue mb-6">${slide.title}</h2>
+                                    <ul class="space-y-4 text-gray-700 text-lg">${slide.points.map(p => `<li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>${p}</span></li>`).join('')}</ul>
+                                    <p class="mt-6 text-gray-600 italic">${slide.caption}</p>
+                                </div>
+                                <div class="w-full md:w-1/2 h-64 md:h-full bg-cover bg-center" style="background-image: url('${slide.imageUrl}');"></div>
+                            </div>
+                        `;
+                        break;
+                    case 'three-column':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col justify-center w-full p-8 md:p-12 bg-ncc-gray">
+                                 <h2 class="text-3xl font-bold text-ncc-blue mb-8 text-center">${slide.title}</h2>
+                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                                    ${slide.columns.map(col => `
+                                        <div class="bg-white p-6 rounded-lg shadow">
+                                            <h3 class="text-xl font-semibold text-ncc-blue mb-4">${col.heading}</h3>
+                                            <ul class="space-y-2 text-gray-600">${col.items.map(item => `<li class="flex items-start"><span class="text-ncc-blue mr-2">▪</span><span>${item}</span></li>`).join('')}</ul>
+                                        </div>
+                                    `).join('')}
+                                 </div>
+                                 <p class="mt-8 text-center text-gray-700 bg-white p-4 rounded-lg shadow w-full">${slide.footer}</p>
+                            </div>
+                        `;
+                        break;
+                    case 'pillars':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col justify-center w-full p-8 md:p-12">
+                                <h2 class="text-3xl font-bold text-ncc-blue mb-8 text-center">${slide.title}</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                                    ${slide.pillars.map(pillar => `
+                                        <div class="p-6">
+                                            <div class="flex justify-center mb-4">${pillar.icon}</div>
+                                            <h3 class="text-2xl font-semibold text-ncc-blue mb-2">${pillar.name}</h3>
+                                            <p class="text-gray-600">${pillar.description}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'table':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col justify-center w-full p-8 md:p-10 bg-ncc-gray">
+                                <h2 class="text-2xl md:text-3xl font-bold text-ncc-blue mb-6 text-center">${slide.title}</h2>
+                                <div class="overflow-x-auto w-full">
+                                    <table class="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr>${slide.headers.map(h => `<th class="p-3 bg-ncc-blue text-white font-semibold text-sm border-b-2 border-ncc-gray">${h}</th>`).join('')}</tr>
+                                        </thead>
+                                        <tbody class="bg-white">
+                                            ${slide.rows.map(row => `<tr class="hover:bg-gray-50">${row.map(cell => `<td class="p-3 border-b border-gray-200 text-sm text-gray-700">${cell}</td>`).join('')}</tr>`).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'conclusion':
+                        slideHtml = `
+                            <div class="slide ${activeClass} flex-col justify-center items-center text-center p-8 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${slide.imageUrl}');">
+                                <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight">${slide.title}</h2>
+                                <p class="text-xl text-white mt-6 max-w-3xl">${slide.statement}</p>
+                            </div>
+                        `;
+                        break;
+                    case 'qa':
+                         slideHtml = `
+                            <div class="slide ${activeClass} flex-col justify-center items-center text-center p-8 bg-ncc-blue">
+                                <h2 class="text-6xl font-bold text-white">${slide.title}</h2>
+                                <p class="text-4xl text-white mt-4">${slide.subtitle}</p>
+                            </div>
+                        `;
+                        break;
+                }
+                presentationContainer.innerHTML += slideHtml;
+            });
+
+            updateControls();
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+            updateControls();
+        }
+
+        function updateControls() {
+            document.getElementById('currentSlideNum').textContent = currentSlide + 1;
+            document.getElementById('totalSlidesNum').textContent = slidesData.length;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === slidesData.length - 1;
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentSlide < slidesData.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                 e.preventDefault();
+                 document.getElementById('nextBtn').click();
+            } else if (e.key === 'ArrowLeft') {
+                 e.preventDefault();
+                 document.getElementById('prevBtn').click();
+            }
+        });
+
+        // Initial render
+        renderSlides();
+
+    </script>
+</body>
+</html>
+
+
